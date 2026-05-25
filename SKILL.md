@@ -19,7 +19,7 @@ tags:
 
 ## When to Use This Skill
 
-Use this skill when the user provides a UI screen recording, product demo video, app walkthrough, extracted frames, or a contact sheet, and wants a structured UI understanding report.
+Use this skill when the user provides a UI screen recording, product demo video, app walkthrough, extracted frames, or contact sheet, and wants a structured UI understanding report.
 
 ## Inputs
 

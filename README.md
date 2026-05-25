@@ -4,7 +4,7 @@
 
 The generated implementation prompt is tool-agnostic and can be used with coding agents such as Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, Codex, or other compatible implementation agents.
 
-The OpenClaw skill name is fixed as `video-ui-understanding`.
+The OpenClaw skill name remains fixed as `video-ui-understanding`.
 
 ## Project Summary
 
