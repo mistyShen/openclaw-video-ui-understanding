@@ -160,7 +160,7 @@ def test_readme_contains_required_install_commands_and_sections() -> None:
     assert "(templates/implementation-agent-prompt-output.md)" in text
     assert "(LICENSE)" in text
     assert "implementation-agent prompt" in text
-    assert "The generated prompt is tool-agnostic" in text
+    assert "The generated implementation prompt is tool-agnostic" in text
     assert "Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, Codex" in text
 
 

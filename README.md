@@ -1,8 +1,10 @@
 # openclaw-video-ui-understanding
 
-`openclaw-video-ui-understanding` converts UI screen recordings into structured UI understanding reports and implementation-agent prompts. The generated prompt is tool-agnostic and can be used with coding agents such as Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, Codex, or other compatible implementation agents.
+`openclaw-video-ui-understanding` converts UI screen recordings into structured UI understanding reports and implementation-agent prompts.
 
-The skill name is fixed as `video-ui-understanding`.
+The generated implementation prompt is tool-agnostic and can be used with coding agents such as Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, Codex, or other compatible implementation agents.
+
+The OpenClaw skill name is fixed as `video-ui-understanding`.
 
 ## Project Summary
 
@@ -13,23 +15,31 @@ This project supports:
 - Optional local frame extraction
 - Optional local contact sheet generation
 
-It does not implement code, launch coding agents, commit Git changes, publish content, upload media, start background services, or provide a Web UI.
+This project does not:
+
+- Implement code automatically
+- Launch coding agents automatically
+- Commit Git changes automatically
+- Publish content automatically
+- Upload videos, frames, screenshots, metadata, or reports
+- Start background services
+- Provide a Web UI
 
 ## Suitable Use Cases
 
-- Turning a product demo video into a frontend implementation brief.
-- Auditing a screen recording to identify visible screens, components, states, actions, and transitions.
-- Creating a conservative UI specification when source design files are unavailable.
-- Preparing an implementation-agent prompt that preserves unclear details as TODO items.
+- Turning a product demo video into a frontend implementation brief
+- Auditing a screen recording to identify visible screens, components, states, actions, and transitions
+- Creating a conservative UI specification when source design files are unavailable
+- Preparing an implementation-agent prompt that preserves unclear details as TODO items
 
 ## Not Suitable For
 
-- Recovering hidden DOM structure or backend logic from video.
-- Automatically implementing code.
-- Automatically calling paid APIs.
-- Automatically analyzing private videos over the network.
-- Reading browser cookies, passwords, SSH keys, API keys, or unrelated user directories.
-- Monitoring folders, recording screens, opening browsers, or running background services.
+- Recovering hidden DOM structure or backend logic from video
+- Automatically implementing code
+- Automatically calling paid APIs
+- Automatically analyzing private videos over the network
+- Reading browser cookies, passwords, SSH keys, API keys, or unrelated user directories
+- Monitoring folders, recording screens, opening browsers, or running background services
 
 ## Installation
 
@@ -101,7 +111,9 @@ All scripts support `--help`, return non-zero exit codes on failure, and print c
 
 ## Output Format
 
-Use [templates/ui-understanding-output.md](templates/ui-understanding-output.md). The report must include:
+Use [templates/ui-understanding-output.md](templates/ui-understanding-output.md) for the UI understanding report.
+
+The report must include:
 
 - A. Source Summary
 - B. Product / Function Goal
@@ -133,25 +145,25 @@ For implementation-agent prompt output, use [templates/implementation-agent-prom
 
 ## Safety Boundaries
 
-- No third-party upload of videos, frames, screenshots, metadata, or reports.
-- No telemetry.
-- No credential access.
-- Do not read browser passwords, cookies, SSH keys, API keys, or unrelated user directories.
-- Do not delete the original video.
-- Do not overwrite the original video.
-- Do not automatically modify a codebase.
-- Do not automatically publish, send, or exfiltrate analysis results.
-- Do not automatically call paid APIs.
-- Do not process private videos over the network by default.
-- If passwords, tokens, private messages, personal data, or sensitive information appears in the video, redact it in the report.
-- If information is uncertain, mark it as `unable to confirm` or `unclear`; do not guess.
+- No third-party upload of videos, frames, screenshots, metadata, or reports
+- No telemetry
+- No credential access
+- Do not read browser passwords, cookies, SSH keys, API keys, or unrelated user directories
+- Do not delete the original video
+- Do not overwrite the original video
+- Do not automatically modify a codebase
+- Do not automatically publish, send, or exfiltrate analysis results
+- Do not automatically call paid APIs
+- Do not process private videos over the network by default
+- If passwords, tokens, private messages, personal data, or sensitive information appears in the video, redact it in the report
+- If information is uncertain, mark it as `unable to confirm` or `unclear`; do not guess
 
 ## Limitations
 
-- Video analysis is limited by resolution, compression, motion blur, cursor occlusion, and playback speed.
-- The skill cannot confirm hidden pages, hidden fields, APIs, data models, route structure, or backend behavior from video alone.
-- The helper scripts do not perform OCR, object detection, cloud processing, browser automation, or code generation.
-- Optional `ffmpeg`, `ffprobe`, and Pillow capabilities depend on local installation.
+- Video analysis is limited by resolution, compression, motion blur, cursor occlusion, and playback speed
+- The skill cannot confirm hidden pages, hidden fields, APIs, data models, route structure, or backend behavior from video alone
+- The helper scripts do not perform OCR, object detection, cloud processing, browser automation, or code generation
+- Optional `ffmpeg`, `ffprobe`, and Pillow capabilities depend on local installation
 
 ## License
 
