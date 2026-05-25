@@ -106,6 +106,8 @@ def test_skill_frontmatter_is_fixed() -> None:
             "screen-recording",
             "product-spec",
             "frontend",
+            "coding-agent",
+            "implementation-agent",
             "codex",
         ],
     }
@@ -125,10 +127,10 @@ def test_skill_json_metadata() -> None:
         "screen-recording",
         "product-spec",
         "frontend",
-            "codex",
-            "coding-agent",
-            "implementation-agent",
-        ]
+        "coding-agent",
+        "implementation-agent",
+        "codex",
+    ]
 
 
 def test_readme_contains_required_install_commands_and_sections() -> None:
@@ -146,9 +148,17 @@ def test_readme_contains_required_install_commands_and_sections() -> None:
         "## License",
     ]:
         assert section in text
-    assert "openclaw skills install https://github.com/<owner>/openclaw-video-ui-understanding" in text
-    assert "git clone https://github.com/<owner>/openclaw-video-ui-understanding.git" in text
+    assert "openclaw skills install https://github.com/mistyShen/openclaw-video-ui-understanding" in text
+    assert "git clone https://github.com/mistyShen/openclaw-video-ui-understanding.git" in text
     assert "openclaw skills install ./openclaw-video-ui-understanding --as video-ui-understanding" in text
+    owner_placeholder = "<" + "owner>"
+    local_users_path = "/" + "Users/"
+    assert owner_placeholder not in text
+    assert local_users_path not in text
+    assert "mistyShen/openclaw-video-ui-understanding" in text
+    assert "(templates/ui-understanding-output.md)" in text
+    assert "(templates/implementation-agent-prompt-output.md)" in text
+    assert "(LICENSE)" in text
     assert "implementation-agent prompt" in text
     assert "The generated prompt is tool-agnostic" in text
     assert "Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, Codex" in text
@@ -175,6 +185,7 @@ def test_ui_understanding_template_contains_fixed_sections_and_timeline_header()
 
 
 def test_implementation_agent_prompt_template_contains_fixed_implementation_rules() -> None:
+    assert not (PROJECT_ROOT / "templates" / "codex-prompt-output.md").exists()
     text = read_text("templates/implementation-agent-prompt-output.md")
     for phrase in [
         "Inspect the existing project structure before making changes.",

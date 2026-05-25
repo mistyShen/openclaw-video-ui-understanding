@@ -10,6 +10,8 @@ tags:
   - screen-recording
   - product-spec
   - frontend
+  - coding-agent
+  - implementation-agent
   - codex
 ---
 

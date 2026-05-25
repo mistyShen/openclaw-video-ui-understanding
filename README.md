@@ -36,17 +36,15 @@ It does not implement code, launch coding agents, commit Git changes, publish co
 ### GitHub Install
 
 ```bash
-openclaw skills install https://github.com/<owner>/openclaw-video-ui-understanding
+openclaw skills install https://github.com/mistyShen/openclaw-video-ui-understanding
 ```
 
 ### Local Install
 
 ```bash
-git clone https://github.com/<owner>/openclaw-video-ui-understanding.git
+git clone https://github.com/mistyShen/openclaw-video-ui-understanding.git
 openclaw skills install ./openclaw-video-ui-understanding --as video-ui-understanding
 ```
-
-Use `<owner>` as a placeholder until the GitHub repository owner is known.
 
 ## Recommended Dependency Installation
 
@@ -103,7 +101,7 @@ All scripts support `--help`, return non-zero exit codes on failure, and print c
 
 ## Output Format
 
-Use [templates/ui-understanding-output.md](/Users/a1234/Documents/coding/openclaw-video-ui-understanding/templates/ui-understanding-output.md). The report must include:
+Use [templates/ui-understanding-output.md](templates/ui-understanding-output.md). The report must include:
 
 - A. Source Summary
 - B. Product / Function Goal
@@ -131,6 +129,8 @@ The timeline table must use:
 
 Unclear details must be placed in `J. Unclear or Unconfirmed Details` and marked `unable to confirm` or `unclear`.
 
+For implementation-agent prompt output, use [templates/implementation-agent-prompt-output.md](templates/implementation-agent-prompt-output.md).
+
 ## Safety Boundaries
 
 - No third-party upload of videos, frames, screenshots, metadata, or reports.
@@ -155,4 +155,4 @@ Unclear details must be placed in `J. Unclear or Unconfirmed Details` and marked
 
 ## License
 
-MIT. See [LICENSE](/Users/a1234/Documents/coding/openclaw-video-ui-understanding/LICENSE).
+MIT. See [LICENSE](LICENSE).

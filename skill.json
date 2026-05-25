@@ -11,9 +11,9 @@
     "screen-recording",
     "product-spec",
     "frontend",
-    "codex",
     "coding-agent",
-    "implementation-agent"
+    "implementation-agent",
+    "codex"
   ],
   "scripts": {
     "inspect": "python3 scripts/inspect_video.py",
