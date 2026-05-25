@@ -35,7 +35,7 @@ def parse_skill_frontmatter() -> dict:
 
 def grep_repo(pattern: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["grep", "-R", pattern, ".", "--exclude-dir=.git"],
+        ["grep", "-R", "-I", pattern, ".", "--exclude-dir=.git"],
         cwd=PROJECT_ROOT,
         check=False,
         capture_output=True,
