@@ -2,7 +2,9 @@
 
 This folder contains illustrative outputs for a hypothetical UI recording.
 
-- `sample-ui-flow-output.md`: example structured UI understanding document
-- `sample-implementation-agent-prompt-output.md`: example implementation-agent prompt based on that document
+- `sample-ui-flow-output.md`: example structured UI understanding report
+- `sample-implementation-agent-prompt-output.md`: example implementation-agent prompt based on that report
 
-The examples are not authoritative for any real product. They demonstrate the required conservative style, especially the use of `无法确认` for unclear details.
+The examples are not authoritative for any real product.
+
+They demonstrate conservative analysis, evidence citation, confidence levels, and the use of `unable to confirm` or `unclear` for uncertain UI details.

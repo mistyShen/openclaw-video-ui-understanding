@@ -10,7 +10,8 @@ Implementation constraints:
 
 - Reuse existing components, routes, state management, and styling systems.
 - Implement only functionality clearly visible in the video-backed UI understanding report.
-- Treat any `unable to confirm` or `unclear` detail as a TODO; do not invent missing pages, buttons, fields, routes, APIs, states, copy, or behaviors.
+- Treat any `unable to confirm` or `unclear` detail as a TODO.
+- Do not invent missing pages, buttons, fields, routes, APIs, states, copy, or behaviors.
 - Preserve all evidence and confidence notes from the report.
 - Do not add telemetry.
 - Do not upload video, frames, screenshots, metadata, or reports.
@@ -26,7 +27,7 @@ Video-backed UI understanding report:
 
 After implementation:
 
-- Run the project existing lint, test, and build commands.
+- Run the project existing lint, test, and build commands when applicable.
 - Output the modified file list.
-- Output verification results.
+- Output validation results.
 - Output unresolved `unable to confirm` or `unclear` items.

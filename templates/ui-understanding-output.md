@@ -81,4 +81,6 @@ List every detail that is not visible, not legible, too fast, partially occluded
 
 ## L. Optional Implementation Agent Prompt
 
-Paste or reference the completed report before using this implementation-agent prompt. Preserve all `unable to confirm` and `unclear` items as unresolved TODOs.
+Paste or reference the completed report before using this implementation-agent prompt.
+
+Preserve all `unable to confirm` and `unclear` items as unresolved TODOs.

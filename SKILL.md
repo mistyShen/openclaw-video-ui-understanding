@@ -17,18 +17,67 @@ tags:
 
 # Video UI Understanding
 
-Use this skill for local UI screen recording videos or product demo videos when the user needs a structured UI understanding report and, optionally, an Implementation Agent Prompt.
+## When to Use This Skill
 
-## Fixed Skill Contract
+Use this skill when the user provides a UI screen recording, product demo video, app walkthrough, extracted frames, or a contact sheet, and wants a structured UI understanding report.
 
-- The repository root must directly contain `SKILL.md`.
-- The skill name is fixed as `video-ui-understanding`.
-- Do not place `SKILL.md` in a subdirectory.
-- Do not rename this skill to `video-ui-to-codex`, `ui-video-parser`, `screenflow`, or any other name.
+## Inputs
 
-## Output Format Contract
+The user may provide:
 
-The UI understanding report must contain these sections exactly:
+- A local video path
+- A folder of extracted frames
+- A contact sheet image
+- A written description plus screenshots
+- A public video link, only if the environment can legally and safely access it
+
+## Required Safety Rules
+
+- Do not upload the user's video to any third-party service unless the user explicitly asks for that
+- Do not delete or overwrite the original video
+- Do not modify the user's codebase
+- Do not install packages without asking
+- Do not infer private information beyond UI behavior
+- Do not invent features that are not visible in the video
+- If text, icons, or states are unclear, mark them as `unclear` or `unable to confirm`
+- If the video contains credentials, tokens, private messages, or personal data, warn the user and avoid reproducing sensitive content
+
+## Recommended Local Workflow
+
+1. Locate the input video.
+2. Create an output directory next to the video.
+3. Inspect video metadata using `ffprobe` if available.
+4. Extract frames using `ffmpeg` if needed.
+5. Use 1 fps for normal UI videos.
+6. Use 2 fps for fast interaction videos.
+7. Generate a contact sheet if helpful.
+8. Review frames in chronological order.
+9. Identify page changes and interaction points.
+10. Produce a structured UI understanding report.
+11. If requested, produce an implementation-agent prompt.
+
+## Analysis Method
+
+Analyze the video as a UI and UX observer, not as a general video summarizer.
+
+For each important time segment or frame group, identify:
+
+- Current page or screen
+- Visible UI elements
+- User action
+- Input text, if visible and safe
+- System response
+- Navigation result
+- State transition
+- Loading, empty, error, and success states
+- Modal, drawer, popover, dropdown, toast, or alert
+- List, table, or card content structure
+- Form fields and validation hints
+- Unclear details
+
+## Required Output Format
+
+Always output:
 
 - A. Source Summary
 - B. Product / Function Goal
@@ -43,86 +92,44 @@ The UI understanding report must contain these sections exactly:
 - K. Implementation Notes
 - L. Optional Implementation Agent Prompt
 
-The timeline table must use this header:
+The timeline table must use this exact header:
 
 ```md
 | Step | Time / Frame | Screen | User Action | System Response | Evidence | Confidence | Notes |
 |---|---|---|---|---|---|---|---|
 ```
 
-`Confidence` must be only `high`, `medium`, or `low`.
+Confidence must be `high`, `medium`, or `low`.
 
-`Evidence` must cite a timestamp, frame number, or screenshot basis.
+Evidence must cite timestamps, frame numbers, or screenshot references.
 
-Any UI detail that is not visible, is too blurry, is too fast, or cannot be verified must be placed in `J. Unclear or Unconfirmed Details`. Use `unable to confirm` or `unclear`; do not guess.
+## Implementation Agent Prompt Rules
 
-Do not state speculation as fact. Do not invent pages, buttons, fields, routes, APIs, states, or behaviors that do not appear in the video. Every inference must include `Evidence` and `Confidence`.
+If the user asks for an implementation-agent prompt, generate a tool-agnostic prompt.
 
-## Script CLI Contract
+The prompt may be used with Codex, Claude Code, Cursor, Windsurf, Aider, OpenHands, OpenClaw agents, or other coding agents.
 
-The bundled scripts expose these fixed interfaces:
+Do not assume a specific coding agent SDK or API.
 
-```bash
-python3 scripts/inspect_video.py <video_path>
-python3 scripts/extract_video_frames.py <video_path> --fps 1 --out <frames_dir>
-python3 scripts/make_contact_sheet.py <frames_dir> --out <contact_sheet_path> --cols 4 --thumb-width 320
-```
+The implementation-agent prompt must instruct the agent to:
 
-- `inspect_video.py` uses `ffprobe`. If `ffprobe` is unavailable, it must print a clear error and return a non-zero exit code.
-- `extract_video_frames.py` defaults to `--fps 1`.
-- Fast UI videos may benefit from `--fps 2`, but the script must not change that automatically.
-- Extracted frames default to JPG.
-- Frame names are fixed as `frame_0001.jpg`, `frame_0002.jpg`, `frame_0003.jpg`, and so on.
-- Existing frame outputs are not overwritten unless `--overwrite` is explicitly passed.
-- `make_contact_sheet.py` defaults to `--cols 4` and `--thumb-width 320`.
-- All scripts must support `--help`.
-- Script failures must return non-zero exit codes with clear error messages.
-- Scripts must not delete or overwrite the input video.
-- Scripts must not write to unknown locations; outputs require explicit `--out` where files are written.
+- Inspect the existing project structure first
+- Reuse existing components, routes, styling, and state management
+- Implement only the UI behavior visible in the video
+- Mark unclear details as TODO
+- Avoid inventing hidden functionality
+- Use mock data or API placeholders only when necessary
+- Run available lint, test, or build checks
+- Report changed files, validation results, and unresolved questions
 
-## Dependency Contract
+## Quality Checklist
 
-Version 0.1.0 only allows:
+Before finalizing, verify:
 
-- Python >= 3.9
-- Optional local system dependency: `ffmpeg`
-- Optional local system dependency: `ffprobe`
-- Optional Python dependency: Pillow, only for contact sheet generation
-- Test dependency: pytest
-
-Do not add OpenCV, moviepy, selenium, playwright, cloud API SDKs, databases, web servers, upload services, telemetry, background services, or browser automation dependencies.
-
-## Safety Contract
-
-- Do not upload videos, frames, screenshots, metadata, or reports to third parties.
-- Do not delete the original video.
-- Do not overwrite the original video.
-- Do not read unrelated user directories.
-- Do not read browser passwords, cookies, SSH keys, API keys, or other credentials.
-- Do not install dependencies unless the user explicitly agrees.
-- Do not automatically modify a codebase.
-- Do not automatically publish, send, or exfiltrate analysis results.
-- If passwords, tokens, private messages, personal data, or sensitive information appears in the video, redact it in the report.
-- Mark uncertain information as `unable to confirm` or `unclear`; do not guess.
-- Do not add telemetry, log upload, or remote callback behavior.
-- Do not automatically call paid APIs.
-- Do not process private videos over the network by default.
-
-## Project Boundary
-
-This version only supports:
-
-- UI video understanding reports
-- Optional implementation-agent prompt generation
-- Optional local frame extraction
-- Optional local contact sheet generation
-
-Do not add automatic code implementation, automatic coding-agent launch, automatic Git commits, automatic publishing, network analysis for private video, paid API calls, cookie access, browser opening, screen recording, folder monitoring, background services, or a Web UI.
-
-## Recommended Workflow
-
-1. Inspect the video locally with `scripts/inspect_video.py`.
-2. Extract frames locally with `scripts/extract_video_frames.py` when `ffmpeg` is available.
-3. Create a local contact sheet with `scripts/make_contact_sheet.py` when Pillow is available.
-4. Fill `templates/ui-understanding-output.md` from evidence only.
-5. Optionally fill `templates/implementation-agent-prompt-output.md` for implementation guidance.
+- No unsupported feature was invented
+- Ambiguous details are marked
+- All visible screens are included
+- User actions and system responses are separated
+- UI elements are grouped clearly
+- Implementation notes are scoped to the video
+- Sensitive text is not reproduced unnecessarily

@@ -111,7 +111,7 @@ All scripts support `--help`, return non-zero exit codes on failure, and print c
 
 ## Output Format
 
-Use [templates/ui-understanding-output.md](templates/ui-understanding-output.md) for the UI understanding report.
+Use [templates/ui-understanding-output.md](templates/ui-understanding-output.md).
 
 The report must include:
 
@@ -135,13 +135,28 @@ The timeline table must use:
 |---|---|---|---|---|---|---|---|
 ```
 
-`Confidence` must be `high`, `medium`, or `low`.
+Confidence must be one of:
 
-`Evidence` must cite timestamps, frame numbers, or screenshot references.
+- high
+- medium
+- low
+
+Evidence must cite timestamps, frame numbers, or screenshot references.
 
 Unclear details must be placed in `J. Unclear or Unconfirmed Details` and marked `unable to confirm` or `unclear`.
 
-For implementation-agent prompt output, use [templates/implementation-agent-prompt-output.md](templates/implementation-agent-prompt-output.md).
+## Implementation Agent Prompt
+
+Use [templates/implementation-agent-prompt-output.md](templates/implementation-agent-prompt-output.md).
+
+The generated implementation-agent prompt must:
+
+- Ask the agent to inspect the existing project first
+- Ask the agent to reuse existing components, routes, state management, and styling systems
+- Restrict implementation to visible video behavior
+- Preserve unclear details as TODO items
+- Require lint, test, or build validation when applicable
+- Require a final changed-files and validation summary
 
 ## Safety Boundaries
 
@@ -162,8 +177,8 @@ For implementation-agent prompt output, use [templates/implementation-agent-prom
 
 - Video analysis is limited by resolution, compression, motion blur, cursor occlusion, and playback speed
 - The skill cannot confirm hidden pages, hidden fields, APIs, data models, route structure, or backend behavior from video alone
-- The helper scripts do not perform OCR, object detection, cloud processing, browser automation, or code generation
-- Optional `ffmpeg`, `ffprobe`, and Pillow capabilities depend on local installation
+- The skill cannot guarantee pixel-perfect visual reconstruction
+- Human review is recommended before using the report as an implementation specification
 
 ## License
 
