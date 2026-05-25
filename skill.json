@@ -1,0 +1,23 @@
+{
+  "name": "video-ui-understanding",
+  "version": "0.1.0",
+  "description": "Convert UI screen recordings into structured UI understanding reports and implementation-agent prompts.",
+  "entry": "SKILL.md",
+  "license": "MIT",
+  "tags": [
+    "video",
+    "ui",
+    "ux",
+    "screen-recording",
+    "product-spec",
+    "frontend",
+    "codex",
+    "coding-agent",
+    "implementation-agent"
+  ],
+  "scripts": {
+    "inspect": "python3 scripts/inspect_video.py",
+    "extract_frames": "python3 scripts/extract_video_frames.py <video_path> --fps 1 --out <frames_dir>",
+    "contact_sheet": "python3 scripts/make_contact_sheet.py <frames_dir> --out <contact_sheet_path> --cols 4 --thumb-width 320"
+  }
+}
